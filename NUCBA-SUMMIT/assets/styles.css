@@ -124,23 +124,11 @@ button:hover{
 }
 
 @media (max-width: 992px) {
-  .header {
-    padding: 0px 50px 0px 10px;
-  }
-  .navbar i {
-    display: block;
-  }
-  .navbar-list {
-    position: absolute;
-    background-color: var(--black);
-    flex-direction: column;
-    top: 100px;
-    right: 0;
-    width: 100%;
-    height: calc(100vh - 100px);
-    display: none;
-    z-index: 9999;
-  }
+  
+
+
+
+  
   #toggle-menu:checked + .navbar-list {
     display: flex;
   }
