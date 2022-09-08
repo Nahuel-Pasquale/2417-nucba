@@ -105,14 +105,16 @@ let arrDeNumeros = [1, 2, 3, 4, 5];
 
 let i = 0; // inicio
 
-while(i <= 10) { //condicion
-    console.log(`estamos por el numero ${i}`)
-    i++; // iterador
-}
+// while(i <= 10) { 
+//     console.log(`estamos por el numero ${i} EN el while`)
+//     i++; 
+// }
 // DO WHILE
+console.log(i)
 do {
-    console.log(`estamos por el numero ${i}`)
-    i++; // iterador
+    console.log(`estamos por el numero ${i} DO WHILE`)
+    i++;
+    console.log(i)
 } while (i <= 10)
 
 
