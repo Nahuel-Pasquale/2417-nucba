@@ -4,4 +4,16 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.color-azul{
+    color: blue;
+}
+.b-color{
+    background-color: white;
+}
+
+.hidden{
+    display: none;
 }
