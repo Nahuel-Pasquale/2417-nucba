@@ -77,6 +77,58 @@ const clearError = (input) => {
 // FUNCIONES UTILES PARA TRABAJAR CON LAS PROPIEDADES DEL OBJETO 'agenda'
 
 
+const getRadioValue = (inputs) => {
+    // tenemos una nodelist de 3 elementos
+    const checkedInput = [...inputs].find(input => input.checked);
+    // devuelvo el input
+    return checkedInput.value //agarramos el valor del input
+}
+
+const getCheckedOptions = (inputs) => {
+    const checkedOptions = [...inputs]
+        .filter(input => input.checked) // devuelvo un array con inputs checkeados
+        .map(e => e.value);
+    console.log('checkedOptions ==>', checkedOptions)
+    return checkedOptions;
+}
+
+const formatDate = (date) => { // 2022-10-10 ==> [2022-10-10] ==> [10, 10, 2020] ==>  10/10/2022
+    const splitDate = date.split('-').reverse().join('/');
+    return splitDate;
+}
+
 // FORMATO DE LAS CARDS
+
+const setCardBackground = (quantity) => {
+    return quantity === 'Más de 10'
+    ? 'violet-card'
+    : quantity === 'Entre 5 y 10'
+    ? 'red-card'
+    : 'black-card'
+}
+
+const setTimeBackground = (quantity) => {
+    return quantity === 'Menos de 5' ? 'red-card' : 'black-card'
+}
+
+const setDateBackground = (quantity) => {
+    return quantity === 'Más de 10' ? 'red-card' : 'violet-card'
+}
+
+const setCardImg = (quantity) => {
+    return quantity === 'Más de 10'
+    ? './assets/img/server.png'
+    : quantity === 'Entre 5 y 10'
+    ? './assets/img/laptop.png'
+    : './assets/img/lupa.png'
+}
+
+const setCardImgClass = (quantity) => {
+    return quantity === 'Más de 10'
+    ? 'server-img'
+    : quantity === 'Entre 5 y 10'
+    ? 'laptop-img'
+    : 'lupa-img'
+}
 
 
