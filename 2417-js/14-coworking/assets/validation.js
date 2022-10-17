@@ -54,13 +54,14 @@ const checkPhone = () => {
 const checkDate = () => {
   let valid = false;
   const dateValue = dateInput.value.trim();
-
+  console.log('!isValidDate(dateValue) ==> ',!isValidDate(dateValue))
   if(!isValidDate(dateValue)) {
     showError(dateInput, 'La fecha ingresada es invalida');
   } else {
     clearError(dateInput)
     valid = true;
   }
+  console.log('valid ==>',valid)
   return valid
 }
 

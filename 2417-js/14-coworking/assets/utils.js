@@ -42,7 +42,8 @@ const setDateIntervals = () => {
 const isValidDate = () => {
     const currentDate = new Date();
     const turnDate = getNextDay();
-    return currentDate < turnDate;
+    console.log('DATE ==>',currentDate < turnDate)
+    return currentDate > turnDate;
 }
 
 const isPhoneValid = (phone) => {
@@ -87,9 +88,9 @@ const getRadioValue = (inputs) => {
 const getCheckedOptions = (inputs) => {
     const checkedOptions = [...inputs]
         .filter(input => input.checked) // devuelvo un array con inputs checkeados
-        .map(e => e.value);
+        .map(e => e.value); // [input1, input2, input3] ==> ['computadora', 'tele', 'tablet']
     console.log('checkedOptions ==>', checkedOptions)
-    return checkedOptions;
+    return checkedOptions; // ['computadora', 'tele', 'tablet'] || [] || ['computadora']
 }
 
 const formatDate = (date) => { // 2022-10-10 ==> [2022-10-10] ==> [10, 10, 2020] ==>  10/10/2022
