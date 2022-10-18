@@ -1,17 +1,18 @@
 
-/* 1. Hacer un menu (navbar) que tenga un logo el icono de menu y adentro 4 enlaces que esten ocultos.
+/* 1. Hacer un menu (navbar) que tenga un logo el icono de menu y adentro 3 enlaces que esten ocultos.
     Hacer un addEventListener al menu para desplegar los elementos.*/
 
+const barsBtn = document.querySelector('.menu-label');
+const barsMenu = document.querySelector('.navbar-list');
 
+barsBtn.addEventListener('click', () => {
+  barsMenu.classList.toggle('open-menu');
+});
 
-
-
-
-    
-
-
-
-
+window.addEventListener('scroll', () => {
+  if(!barsMenu.classList.contains('open-menu')) return;
+  barsMenu.classList.remove('open-menu');
+});
 
 /*
 2.  Validacion de forms. Hacer un form que tenga email, contraseña, que valide que el email se un email 
@@ -20,15 +21,80 @@
     Ej, Email invalido / La contraseña tiene que tener una mayuscula, minuscula y un numero.
 */
 
+const emailInput = document.getElementById('email');
+const passInput = document.getElementById('pass');
+const validForm = document.getElementById('valid-form');
+
+// MANEJO DE ERRORES
+
+const showError = (input, message) => {
+  const formField = input.parentElement;
+  formField.classList.add('error')
+  const error = formField.querySelector("small");
+  error.textContent = message;
+}
+
+const clearError = (input) => {
+  const formField = input.parentElement;
+  formField.classList.remove('error')
+  const error = formField.querySelector("small");
+  error.textContent = '';
+}
+
+const isEmpty = (value) => value === !value.length;
+
+const isEmailValid = (email) => {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+const isPassValid = (pass) => {
+  const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
+  return re.test(pass);
+}
+
+const checkEmail = () => {
+  let valid = false;
+  const emailValue = emailInput.value.trim();
+
+  if(isEmpty(emailValue)) {
+    showError(emailInput, 'El email es obligatorio');
+  } else if(!isEmailValid(emailValue)) {
+    showError(emailInput, 'El email no es valido');
+  } else {
+    clearError(emailInput)
+    valid = true;
+  }
+  return valid
+}
+
+const checkPassword = () => {
+  let valid = false;
+  const password = passInput.value.trim();
+  if(isEmpty(password)){
+    showError(passInput, 'La contraseña es obligatoria')
+  } else if(!isPassValid(password)){
+    showError(passInput, 'La contraseña debe tener al menos 8 caracteres, entre ellos una mayuscula, un número y un caracter especial')
+  } else {
+    clearError(passInput)
+    valid = true;
+  }
+  return valid;
+}
 
 
-
-
-
-
-
-
-
+validForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  // valido cada input
+  const isEmailValid = checkEmail();
+  const isPasswordValid = checkPassword();
+  // valido el form
+  const isFormValid = isEmailValid && isPasswordValid;
+  if(isFormValid) {
+    validForm.submit();
+    alert('Formulario enviado');
+  }
+})
 
 
 /*3. Tenemos este array de tareas. Crear una funcion para renderizar cada elemento de este array
@@ -43,34 +109,62 @@ const tareas = [
   'Leer un libro',
 ];
 
-
-
-
-
-
-
-
-
-
+const renderList = (tareas) => {
+  const list = document.getElementById('list');
+  tareas.forEach(tarea => {
+    const li = document.createElement('li');
+    li.textContent = tarea;
+    list.appendChild(li)
+  });
+};
+renderList(tareas);
 
 /*
 4. Hacer un input y un boton de enviar. 
-    Crear una funcion para pintar en el html lo que escribamos en el input cuando aprentemos el boton de enviar. 
+    Crear una funcion para pintar en el html lo que escribamos en el
+    input cuando apretemos el boton de enviar. 
     Y que los datos persistan en el local storage
 */
+const form = document.getElementById('form');
+const input = document.getElementById('input');
+const caja = document.getElementById('caja');
+
+// 2- traer elementos del LS si existen
+let items = JSON.parse(localStorage.getItem('items')) || [];
+// 3- grabar en LS
+const saveLocalStorage = (items) => {
+    localStorage.setItem('items', JSON.stringify(items))
+};
+
+const createHTML = items => {
+  const html = items.map(item => {
+    return `<li> ${item} </li>`
+  }).join('');
+  caja.innerHTML = html;
+}
+
+const init = () => {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const item = input.value;
+    input.value = '';
+
+    items = [...items, item];
+
+    saveLocalStorage(items);
+    createHTML(items);
+  })
+  document.addEventListener('DOMContentLoaded', createHTML(items));
+}
+
+init();
 
 
 
 
 
-
-
-
-
-
-
-
-/*5.Tenemos el siguiente array de objetos, renderizar cada objeto en una card.*/
+/*5.Tenemos el siguiente array de objetos, 
+    renderizar cada objeto en una card.*/
 let peliculas = [
   {
     id: 1,
@@ -133,5 +227,22 @@ let peliculas = [
       'https://m.media-amazon.com/images/M/MV5BMTUzMzUyOTktNmYyNS00YTA1LWIxNmQtMGIzZDYxZGI3OTliXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_.jpg',
   },
 ];
+const cards = document.getElementById('cards')
 
+const renderCard = pelicula => {
+  const { titulo, descripcion, director, anio, imagen } = pelicula
+  return `
+    <div class="card">
+    <img src="${imagen}" alt="${titulo}" class="card-img">
+    <div class="card-body">
+        <h3>${titulo}</h3>
+        <p>${descripcion}</p>
+        <p>${director}</p>
+        <p>${anio}</p>
+    </div>
+    </div>
+    `;
+};
 
+const renderCards = peliculas => cards.innerHTML = peliculas.map(renderCard).join('');
+window.addEventListener('DOMContentLoaded', renderCards(peliculas));

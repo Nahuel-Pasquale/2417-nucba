@@ -8,7 +8,69 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    
+
+    <!-- EJERICIO 1 -->
+    <header>
+      <h1>LOGO ej 1</h1>
+      <nav class="navbar">
+        <div class="menu-label">
+          <img src="./img/menu.png" alt="MENU" class="menu-icon">
+        </div>
+        <ul class="navbar-list">
+          <li> <a href="#" class="navbar-link"> Home </a></li>
+          <li> <a href="#" class="navbar-link"> Contact </a></li>
+          <li> <a href="#" class="navbar-link"> About </a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="ej-2">
+      <h2>validacion form</h2>
+      <form id="valid-form">
+        <div class="form__field">
+          <label for="email">Email</label>
+          <input type="email" id="email" />
+          <small></small>
+        </div>
+        <div class="form__field">
+          <label for="pass">Password</label>
+          <input type="text" id="pass" />
+          <small></small>
+        </div>
+
+        <input type="submit" value="Enviar" />
+        <p id="msg"></p>
+      </form>
+    </div>
+
+    <div class="ej-3 list">
+      <ul class="list" id="list">
+
+      </ul>
+    </div>
+
+    <div class="ej-4">
+      <h2>Ejercicio Render + local</h2>
+
+      <form id="form">
+        <input type="text" placeholder="ingresa una tarea" id="input"/>
+        <input type="submit" value="Enviar" id="input-form"/>
+      </form>
+      <div class="caja-ej4" id="caja">
+        
+      </div>
+    </div>
+
+
+    <div class="ej-cards">
+      <div id="cards">
+
+      </div>
+    </div>
+
+
+
+
     <script src="./main.js"></script>
   </body>
 </html>

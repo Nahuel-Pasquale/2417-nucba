@@ -42,7 +42,8 @@ const setDateIntervals = () => {
 const isValidDate = () => {
     const currentDate = new Date();
     const turnDate = getNextDay();
-    console.log('DATE ==>',currentDate < turnDate)
+    // console.log('DATE ==>', currentDate < turnDate)
+    // console.log('DATENEW ==>', currentDate > turnDate)
     return currentDate > turnDate;
 }
 
