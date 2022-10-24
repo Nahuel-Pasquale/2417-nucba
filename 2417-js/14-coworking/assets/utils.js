@@ -39,12 +39,12 @@ const setDateIntervals = () => {
 
 // FUNCIONES PARA LA VALIDACION
 
-const isValidDate = () => {
+const isValidDate = (date) => {
     const currentDate = new Date();
-    const turnDate = getNextDay();
+    const turnDate = new Date(date);
     // console.log('DATE ==>', currentDate < turnDate)
     // console.log('DATENEW ==>', currentDate > turnDate)
-    return currentDate > turnDate;
+    return currentDate < turnDate;
 }
 
 const isPhoneValid = (phone) => {
